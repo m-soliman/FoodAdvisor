@@ -1,27 +1,10 @@
 var express = require('express');
 var app = express();
-var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var uuid = require('uuid');
+var bodyParser = require('body-parser');
 
 var users = {maria: {name: 'maria', pass:'12345'}};
-
-passport.use(new localStrategy(
-  function(username, password, done) {
-    if (user in users && password == users[user].pass) {
-      return done(null, users[user]);
-    }
-    return done(null, false, {message: 'Ächts!'});
-  }
-));
-passport.serializeUser(function(user, done) {
-  done(null, user.name);
-});
-
-passport.deserializeUser(function(id, done) {
-  done(null, users[id]);
-});
 
 app.use(session({
   genid: function (req) {
@@ -29,8 +12,11 @@ app.use(session({
   },
   secret: 'Pink fluffy unicorns dancing on rainbows'
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.set('views', './views');
 app.set('view engine', 'jade');
 app.set('view options', { debug: true });
@@ -40,12 +26,22 @@ app.get('/', function (req, res) {
   res.render('index', {pageTitle: 'Index'});
 });
 
-app.get('/login', function (req, res) {
-  res.render('login', {pageTitle: 'Login'});
+app.get('/partials/home', function (req, res) {
+  res.render('home', {});
 });
 
-app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.redirect('/');
+app.get('/partials/login', function (req, res) {
+  res.render('login', {});
+});
+
+app.post('/login', function (req, res) {
+  console.log('user '+req.body.username);
+  console.log('pass: '+req.body.password);
+
+  if (req.body.username in users && users[req.body.username].pass == req.body.password) {
+    res.json({success: true});
+  }
+  res.json({success: false});
 });
 
 app.listen(3000, function () {

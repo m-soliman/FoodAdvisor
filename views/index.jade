@@ -1,4 +1,8 @@
-extends ./main.jade
-
-block content
-  p Welcome to the great FoodAdvisor!
+doctype html
+html(lang="en",ng-app="foodAdvisor")
+  head
+    title= pageTitle
+    script(type="text/javascript",src="js/bundle.js")
+  body
+    h1= pageTitle
+    #view(ng-view)

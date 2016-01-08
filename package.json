@@ -4,16 +4,21 @@
   "description": "to be added",
   "main": "js/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-js": "browserify public/js/main.js -o public/js/bundle.js",
+    "watch-js": "watchify public/js/main.js -o public/js/bundle.js"
   },
   "author": "Maria Soliman",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.4.8",
+    "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "jade": "^1.11.0",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
     "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "browserify": "latest",
+    "watchify": "latest"
   }
 }

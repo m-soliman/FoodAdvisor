@@ -1,7 +1,8 @@
 doctype html
-html(lang="en")
+html(lang="en",ng-app="foodAdvisor")
   head
     title= pageTitle
+    script(type="text/javascript",src="js/bundle.js")
   body
     h1= pageTitle
     block content

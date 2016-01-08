@@ -1,12 +1,8 @@
-extends ./main.jade
-
-block content
-  form(action="/login", method="post")
-    div
-      label(for="username") User:
-      input(type="text", name="username", id="username")
-    div
-      label(for="password") Password:
-      input(type="password", name="password", id="password")
-    div
-      input(type="submit", value="Log in!")
+div
+  label(for="username") User:
+  input(type="text", name="username", id="username", ng-model="username")
+div
+  label(for="password") Password:
+  input(type="password", name="password", id="password", ng-model="password")
+div
+  input(type="submit", value="Log in!", ng-click="login()")
