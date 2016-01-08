@@ -1,0 +1,19 @@
+{
+  "name": "FoodAdvisor",
+  "version": "0.1.0",
+  "description": "to be added",
+  "main": "js/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maria Soliman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "jade": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "uuid": "^2.0.1"
+  }
+}
